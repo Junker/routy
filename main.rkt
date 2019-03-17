@@ -69,8 +69,10 @@
 
 ; files handler
 (define/contract (routy/files path #:root [root (current-directory)])
-    ((or/c string? path?) . -> . any/c) ;contract
-    (routy/get (string-append path "/**") (λ (req params)
+    ((path-string?) (#:root path-string?) . ->* . any/c) ;contract
+
+    (routy/get (string-append (string-trim path "/") "/**") (λ (req params)
+        (displayln params)
         (let ([fullpath (build-path root (path->relative-path (simplify-path (url->path (request-uri req)))))])
             (if (file-exists? fullpath)
                 (response/output (λ (op) (copy-port (open-input-file fullpath) op)) 

@@ -13,7 +13,7 @@
     (lambda (req)
         "I don't have this page! :'("))
 
-(routy/files "/docs" :root "/var/www/my-site")
+(routy/files "/docs" #:root "/var/www/my-site")
 
 
 (serve/servlet
