@@ -14,6 +14,13 @@ It uses the same routing syntax as used by popular Ruby web frameworks like Ruby
   (lambda (req params)
     (format "blog:~a page:~a" (request/param params 'name) (request/param params 'page))))
 
+(routy/post ...) ; POST request
+(routy/put ...) ; PUT request
+(routy/delete ...) ; DELETE request
+(routy/patch ...) ; PATCH request
+
+
+
 ;start server
 (serve/servlet
     (λ (req) (routy/response req)) ; routy response
