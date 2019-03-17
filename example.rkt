@@ -3,7 +3,7 @@
 (require web-server/servlet
          web-server/servlet-env)
 
-(require "main.rkt")
+(require routy)
 
 (routy/get "/blog/:name/page/:page" #:constraints '((name #px"\\w+") (page #px"\\d+"))
   (lambda (req params) 

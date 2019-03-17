@@ -8,6 +8,7 @@ It uses the same routing syntax as used by popular Ruby web frameworks like Ruby
 ```racket
 (require routy)
 (require web-server/servlet)
+(require response-ext)
 
 (routy/get "/blog/:name/page/:page" ; eg. "/blog/racket/page/2"
   (lambda (req params)

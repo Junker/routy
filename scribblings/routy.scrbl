@@ -19,6 +19,7 @@ Example of usage:
 @racketblock[
 (require routy)
 (require web-server/servlet)
+(require response-ext)
 
 (routy/get "/blog/:name/page/:page" ; eg. "/blog/racket/page/2"
   (lambda (req params)
