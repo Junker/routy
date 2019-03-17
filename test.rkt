@@ -33,6 +33,10 @@
 
 	(check-true (void?  
 		(routy/not-found 
+			"OOPS.. CANNOT FIND THIS PAGE")))
+
+	(check-true (void?  
+		(routy/not-found 
 				(lambda (req) 
 					(response/make #:code 200 "SOME TEXT")))))
 
