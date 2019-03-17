@@ -14,6 +14,18 @@ HTTP router for Racket
 Routy is a lightweight high performance HTTP request router for Racket.  
 It uses the same routing syntax as used by popular Ruby web frameworks like Ruby on Rails and Sinatra.
 
+
+@defproc[(routy/get [path string?]
+                    [proc (-> (or/c response? string?))]) response?]
+                    [#:constraints (listof pair?) '()]{
+
+handle GET requests
+@racketblock[
+ (routy/get "/blog/:name/page/:page" ; eg. "/blog/racket/page/2"
+   (lambda (req params)
+     (format "blog:~a page:~a" (request/param params 'name) (request/param params 'page))))]
+}
+
 Example of usage:
 
 @racketblock[
