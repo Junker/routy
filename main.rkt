@@ -2,7 +2,7 @@
 
 (require web-server/servlet
          racket-route-match
-         "response.rkt")
+         response-ext)
     
 (provide routy/get
          routy/post
@@ -12,8 +12,6 @@
          routy/not-found
          routy/files
          request/param
-         response/make
-         response/not-found
          routy/response)
 
 (struct handler (route proc))
@@ -74,8 +72,7 @@
     (routy/get (string-append (string-trim path "/") "/**") (λ (req params)
         (let ([fullpath (build-path root (path->relative-path (simplify-path (url->path (request-uri req)))))])
             (if (file-exists? fullpath)
-                (response/output (λ (op) (copy-port (open-input-file fullpath) op)) 
-                    #:mime-type TEXT/HTML-MIME-TYPE)
+                (response/file fullpath)
                 (response/not-found-internal req))))))
 
 ; Makes response

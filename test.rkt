@@ -2,6 +2,7 @@
 
 (require rackunit
 		 web-server/servlet
+		 response-ext
 		 "main.rkt")
 
 (test-case "main"

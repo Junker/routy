@@ -1,6 +1,8 @@
 #lang scribble/manual
 @require[@for-label[routy
-                    racket/base]]
+                    racket/base
+                    response-ext
+                    web-server/servlet]]
 
 @title{routy}
 @author{junker}
