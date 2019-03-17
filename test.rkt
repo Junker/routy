@@ -42,7 +42,7 @@
 					(response/make #:code 200 "SOME TEXT")))))
 
 	(check-true (void?  
-		(routy/files "/my-site" #:root "/var/www"))))
+		(routy/files "/my-site" #:root "/var/www")))
 
 	(define req (request #"GET" (string->url "/blog/racket/page/2") '() (delay '()) #f "127.0.0.1" 8000 "127.0.0.1"))
 
@@ -54,4 +54,4 @@
 
 	(check-equal?
 		(get-output-string content-port)
-		"blog:racket page:2")
+		"blog:racket page:2"))
