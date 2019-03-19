@@ -16,15 +16,75 @@ It uses the same routing syntax as used by popular Ruby web frameworks like Ruby
 
 
 @defproc[(routy/get [path string?]
-                    [proc (-> (or/c response? string?))]) response?]
-                    [#:constraints (listof pair?) '()]{
+                    [proc (-> (or/c response? string?))]
+                    [#:constraints (listof pair?) '()]) response?]{
 
-handle GET requests
+handle GET request
+path - path pattern. eg. "/blog/some*/page/:page"
+proc - procedure takes 2 arguments: (req params) 
+       req (request?)- HTTP request
+       params (listof pair?) - requestr params, should be used with request/param
+       returns string or response
+
 @racketblock[
  (routy/get "/blog/:name/page/:page" ; eg. "/blog/racket/page/2"
    (lambda (req params)
      (format "blog:~a page:~a" (request/param params 'name) (request/param params 'page))))]
 }
+
+@defproc[(routy/post [path string?]
+                     [proc (-> (request? (listof pair?)) (or/c response? string?))]
+                     [#:constraints (listof pair?) '()]) void?]{
+
+handle POST request
+}
+
+@defproc[(routy/put [path string?]
+                    [proc (-> (or/c response? string?))]
+                    [#:constraints (listof pair?) '()]) void?]{
+
+handle PUT request
+}
+
+@defproc[(routy/patch [path string?]
+                      [proc (-> (or/c response? string?))]
+                      [#:constraints (listof pair?) '()]) void?]{
+
+handle PATCH request
+}
+
+@defproc[(routy/delete [path string?]
+                       [proc (-> (or/c response? string?))]
+                       [#:constraints (listof pair?) '()]) void?]{
+
+handle DELETE request
+}
+
+
+@defproc[(routy/files [path path-string?]
+                      [#:root string? (current-directory)]) void?]{
+
+serve files
+}
+
+@defproc[(routy/not-found [content (or/c string? procedure?)]) void?]{
+
+Not found route
+}
+
+@defproc[(routy/response [req request?]) response?]{
+
+Handle web-server requests.
+
+@racketblock[
+(serve/servlet
+    (λ (req) (routy/response req)) ; routy response
+    #:launch-browser? #f
+    #:servlet-path "/"
+    #:port 8000
+    #:servlet-regexp #rx"")]
+}
+
 
 Example of usage:
 
@@ -36,6 +96,10 @@ Example of usage:
 (routy/get "/blog/:name/page/:page" ; eg. "/blog/racket/page/2"
   (lambda (req params)
     (format "blog:~a page:~a" (request/param params 'name) (request/param params 'page))))
+
+(routy/get "/product/:id" ; eg. "/product/34"
+  (lambda (req params)
+    (response/not-found)))
 
 (routy/post ...) ; POST request
 (routy/put ...) ; PUT request

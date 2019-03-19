@@ -19,8 +19,6 @@ It uses the same routing syntax as used by popular Ruby web frameworks like Ruby
 (routy/delete ...) ; DELETE request
 (routy/patch ...) ; PATCH request
 
-
-
 ;start server
 (serve/servlet
     (λ (req) (routy/response req)) ; routy response
