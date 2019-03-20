@@ -23,10 +23,7 @@
 
 ; Add request handler
 (define/contract (routy/handler method path proc #:constraints constraints)
-    (symbol? string? procedure? #:constraints (listof pair?) . -> . any/c) ;contract
-
-     (unless (= (procedure-arity proc) 2)
-        (raise-argument-error 'raise-argument-error "routy/handler: request handler procedure must have 2 arguments (request params)" proc))
+    (symbol? string? (procedure-arity-includes/c 2) #:constraints (listof pair?) . -> . any/c) ;contract
 
     (hash-set! handlers 
         method 
@@ -79,15 +76,15 @@
 (define/contract (routy/response req)
     (request? . -> . response?) ; contract
 
-    (let ([handler-keys (find-handler req)])
-        (case handler-keys
+    (let ([handler-params (find-handler req)])
+        (case handler-params
             [(#f) (response/not-found-internal req)]
             [else
-                (let ([handler (first handler-keys)]
-                      [keys (second handler-keys)])
+                (let ([handler (first handler-params)]
+                      [params (second handler-params)])
                             (let* ([proc (handler-proc handler)]
                                    [route (handler-route handler)]
-                                   [resp (proc req keys)])
+                                   [resp (proc req params)])
                                 (if (response? resp)
                                     resp
                                     (response/make resp))))])))
@@ -112,8 +109,8 @@
            [method-handlers
                (hash-ref handlers method)])
         (for/or ([handler method-handlers]) 
-            (let ([keys (route-match (handler-route handler) (request-uri req))])
-                (if keys (list handler keys) #f)))))
+            (let ([params (route-match (handler-route handler) (request-uri req))])
+                (if params (list handler params) #f)))))
 
 
 ; Convert path to relative path

@@ -54,4 +54,10 @@
 
 	(check-equal?
 		(get-output-string content-port)
-		"blog:racket page:2"))
+		"blog:racket page:2")
+
+	(check-exn exn:fail:contract?
+		(lambda ()
+			(routy/get "/blog/:name/page/:page"
+				(lambda (req) 
+					"123")))))
