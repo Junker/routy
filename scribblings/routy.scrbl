@@ -17,7 +17,7 @@ It uses the same routing syntax as used by popular Ruby web frameworks like Ruby
 
 @defproc[(routy/get [path string?]
                     [proc (-> (or/c response? string?))]
-                    [#:constraints (listof pair?) '()]) response?]{
+                    [#:constraints constraints (listof pair?) '()]) response?]{
 
 handle GET request
 path - path pattern. eg. "/blog/some*/page/:page"
@@ -34,28 +34,28 @@ proc - procedure takes 2 arguments: (req params)
 
 @defproc[(routy/post [path string?]
                      [proc (-> (request? (listof pair?)) (or/c response? string?))]
-                     [#:constraints (listof pair?) '()]) void?]{
+                     [#:constraints constraints (listof pair?) '()]) void?]{
 
 handle POST request
 }
 
 @defproc[(routy/put [path string?]
                     [proc (-> (or/c response? string?))]
-                    [#:constraints (listof pair?) '()]) void?]{
+                    [#:constraints constraints (listof pair?) '()]) void?]{
 
 handle PUT request
 }
 
 @defproc[(routy/patch [path string?]
                       [proc (-> (or/c response? string?))]
-                      [#:constraints (listof pair?) '()]) void?]{
+                      [#:constraints constraints (listof pair?) '()]) void?]{
 
 handle PATCH request
 }
 
 @defproc[(routy/delete [path string?]
                        [proc (-> (or/c response? string?))]
-                       [#:constraints (listof pair?) '()]) void?]{
+                       [#:constraints constraints (listof pair?) '()]) void?]{
 
 handle DELETE request
 }
