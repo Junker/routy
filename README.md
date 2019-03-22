@@ -4,6 +4,9 @@ HTTP router for Racket
 Routy is a lightweight high performance HTTP request router for Racket.  
 It uses the same routing syntax as used by popular Ruby web frameworks like Ruby on Rails and Sinatra.
 
+## Documentation
+[Documentation](https://pkg-build.racket-lang.org/doc/routy@routy/index.html)
+
 ## Usage
 ```racket
 (require routy)
