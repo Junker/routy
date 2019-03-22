@@ -15,6 +15,8 @@ Routy is a lightweight high performance HTTP request router for Racket.
 It uses the same routing syntax as used by popular Ruby web frameworks like Ruby on Rails and Sinatra.
 
 
+@section{API}
+
 @defproc[(routy/get [path string?]
                     [proc (-> (or/c response? string?))]
                     [#:constraints constraints (listof pair?) '()]) response?]{
@@ -62,7 +64,7 @@ handle DELETE request
 
 
 @defproc[(routy/files [path path-string?]
-                      [#:root string? (current-directory)]) void?]{
+                      [#:root root string? (current-directory)]) void?]{
 
 serve files
 }
@@ -86,7 +88,7 @@ Handle web-server requests.
 }
 
 
-Example of usage:
+@section{Example of usage}
 
 @racketblock[
 (require routy)
