@@ -1,4 +1,6 @@
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 [![Build Status](https://travis-ci.com/Junker/routy.svg?branch=master)](https://travis-ci.com/Junker/routy)
+[![Scribble Docs](https://img.shields.io/badge/Docs-Scribble-blue.svg)](https://pkg-build.racket-lang.org/doc/routy@routy/index.html)
 
 # Routy
 HTTP router for Racket 
