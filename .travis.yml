@@ -71,3 +71,7 @@ script:
 # - raco test -x -p <your-package-name>
 
 after_script:
+- cd ..   # Travis did a cd into the dir. Back up, for the next:
+- travis_retry raco pkg install racket-route-match
+- travis_retry raco pkg install response-ext
+
