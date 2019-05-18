@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/Junker/routy.svg?branch=master)](https://travis-ci.com/Junker/routy)
+
 # Routy
 HTTP router for Racket 
 
