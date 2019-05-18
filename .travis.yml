@@ -56,13 +56,12 @@ before_install:
 install:
 
 before_script:
-- travis_retry raco pkg install racket-route-match
-- travis_retry raco pkg install response-ext
 
 # Here supply steps such as raco make, raco test, etc.
 script:
-  - raco make main.rkt
-  - raco test -x .
+ - cd ..   # Travis did a cd into the dir. Back up, for the next:
+ - travis_retry raco pkg install --deps search-auto https://github.com/Junker/routy.git
+ - raco test -p routy
 
 # OR: If your repo is a Racket package with an info.rkt that includes
 # some `deps`:
