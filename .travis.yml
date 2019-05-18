@@ -16,31 +16,31 @@ env:
     # versions.
     #
     # The RELEASE snapshot is only available during the release process.
-    - RACKET_VERSION=6.1
-    - RACKET_VERSION=6.1.1
-    - RACKET_VERSION=6.2
-    - RACKET_VERSION=6.3
-    - RACKET_VERSION=6.4
-    - RACKET_VERSION=6.5
-    - RACKET_VERSION=6.6
-    - RACKET_VERSION=6.7
-    - RACKET_VERSION=6.8
-    - RACKET_VERSION=6.9
-    - RACKET_VERSION=6.10
-    - RACKET_VERSION=6.11
-    - RACKET_VERSION=6.12
+#    - RACKET_VERSION=6.1
+#    - RACKET_VERSION=6.1.1
+#    - RACKET_VERSION=6.2
+#    - RACKET_VERSION=6.3
+#    - RACKET_VERSION=6.4
+#    - RACKET_VERSION=6.5
+#    - RACKET_VERSION=6.6
+#    - RACKET_VERSION=6.7
+#    - RACKET_VERSION=6.8
+#    - RACKET_VERSION=6.9
+#    - RACKET_VERSION=6.10
+#    - RACKET_VERSION=6.11
+#    - RACKET_VERSION=6.12
     - RACKET_VERSION=7.0
     - RACKET_VERSION=7.1
-    - RACKET_VERSION=HEAD
-    - RACKET_VERSION=HEADCS
+#    - RACKET_VERSION=HEAD
+#    - RACKET_VERSION=HEADCS
     - RACKET_VERSION=RELEASE
 
 # You may want to test against certain versions of Racket, without
 # having them count against the overall success/failure.
 matrix:
   allow_failures:
-    - env: RACKET_VERSION=HEAD
-    - env: RACKET_VERSION=HEADCS
+#    - env: RACKET_VERSION=HEAD
+#    - env: RACKET_VERSION=HEADCS
     - env: RACKET_VERSION=RELEASE
   # Fast finish: Overall build result is determined as soon as any of
   # its rows have failed, or, all of its rows that aren't allowed to
@@ -56,6 +56,8 @@ before_install:
 install:
 
 before_script:
+- travis_retry raco pkg install racket-route-match
+- travis_retry raco pkg install response-ext
 
 # Here supply steps such as raco make, raco test, etc.
 script:
@@ -71,7 +73,4 @@ script:
 # - raco test -x -p <your-package-name>
 
 after_script:
-- cd ..   # Travis did a cd into the dir. Back up, for the next:
-- travis_retry raco pkg install racket-route-match
-- travis_retry raco pkg install response-ext
 
