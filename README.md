@@ -1,17 +1,19 @@
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
-[![Build Status](https://travis-ci.com/Junker/routy.svg?branch=master)](https://travis-ci.com/Junker/routy)
 [![Scribble Docs](https://img.shields.io/badge/Docs-Scribble-blue.svg)](https://pkg-build.racket-lang.org/doc/routy@routy/index.html)
 
 # Routy
-HTTP router for Racket 
+
+HTTP router for Racket
 
 Routy is a lightweight high performance HTTP request router for Racket.  
 It uses the same routing syntax as used by popular Ruby web frameworks like Ruby on Rails and Sinatra.
 
 ## Documentation
+
 [Documentation](https://pkg-build.racket-lang.org/doc/routy@routy/index.html)
 
 ## Usage
+
 ```racket
 (require routy)
 (require web-server/servlet)
@@ -37,6 +39,7 @@ It uses the same routing syntax as used by popular Ruby web frameworks like Ruby
 ```
 
 with wildcards:
+
 ```racket
 (routy/get "/blog/some*/page/:page" ; eg. "/blog/some-racket/page/2"
   (lambda (req params) 
@@ -52,29 +55,31 @@ with wildcards:
 ```
 
 not found 404 page:
+
 ```racket
 (routy/not-found 
-	(lambda (req) 
-		"OOPS.. CANNOT FIND THIS PAGE"))
+  (lambda (req) 
+    "OOPS.. CANNOT FIND THIS PAGE"))
 
 (routy/not-found 
-	"OOPS.. CANNOT FIND THIS PAGE")
+  "OOPS.. CANNOT FIND THIS PAGE")
 
 (routy/not-found 
-	(lambda (req)
-		(response/make #:code 200 "SOME TEXT")))
+  (lambda (req)
+    (response/make #:code 200 "SOME TEXT")))
 ```
 
 serve files:
+
 ```racket
 (routy/files "/plain-docs" #:root "/var/www/my-site") ; eg. "/plain-docs/boring-doc.html"
 ```
 
 with params constraints:
+
 ```racket
 
 (routy/get "/blog/:name/page/:page" #:constraints '((name #px"\\w+") (page #px"\\d+")) ; eg. "/blog/racket/page/2", but not "/blog/10/page/two"
   (lambda (req params) 
     (format "blog:~a page:~a" (request/param params 'name) (request/param params 'page))))
 ```
-
